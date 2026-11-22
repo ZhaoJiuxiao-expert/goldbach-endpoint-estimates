@@ -1,0 +1,446 @@
+{
+  "lean": "Lean (version 4.13.0, x86_64-w64-windows-gnu, commit 6d22e0e5cc5a, Release)",
+  "mathlib_commit_from_lockfile": "d7317655e2826dc1f1de9a0c138db2775c4bb841",
+  "build": "lake build",
+  "build_exit_code": 0,
+  "source_modules": 19,
+  "audited_declarations": 81,
+  "example": [
+    "N=4800, z=8, t=600: detected=89, genuine=88 (ordered).",
+    "The only extra term is 2083 + 11*13*19.",
+    "N=4800, z=24: detected=genuine=88; single=-484.0523, combined=692.8513, prime-pair log sum=683.3416, excess=9.5096, power bound=95.6543.",
+    "At z=70 the negative single endpoint equals the pair log sum plus log(13489)."
+  ],
+  "sha256": {
+    "CubicEndpoint.lean": "adb79e07859c24a0dcd7a7469f3c953e33a82c93cf51365780ccf1057ba390fe",
+    "CubicMangoldt.lean": "0196db07dcf41d2d31e9e2256ffcbb69848d634f9bef4e5a13468b864519ecf6",
+    "CubicRate.lean": "2a588a15975f007e16570b052c934442a535c35bdc019717ed0f272540f96f40",
+    "ExactCutoff.lean": "03898ff56acc3011fcabff864dfdfb5b5d76832b47962a5bd0bc3bd9bfc74c3d",
+    "ExactPollution.lean": "84279e91b770e147d705a34576b5f750045e651d2d41fa4880caf3cc18c74ead",
+    "FourierWindow.lean": "2561457849daf92029e8de2f0090ebeeed0b3a8a0b2d12aa583a47a6810f88ad",
+    "MangoldtRate.lean": "00b3ca9d567f95da51850a144ab31f745fe44d9cc3544afdedf75c88714bfb0f",
+    "NonprincipalEndpoint.lean": "e4bbfc40e68e0e34534a8c457c9196eeb9e4253fc572af6dffb40cd0c70b4b53",
+    "Orthogonality.lean": "4842573b0fecb4fe1228a53023c5298a88b994ea608fd4c16627b693bd96c936",
+    "PaperFourier.lean": "9344b686945c57fa1131abe3e5d19f15c215f8a99f7751bc38dd56c52944d916",
+    "PrimeEndpoint.lean": "df195f7c917bc7ad7b53852185c588dc70d88337d42943a520472cdd104c5f46",
+    "PrimePowerError.lean": "bdb1eb1dfb44c4169b845c769b74ddc4a9020b6d35f765dbd5c8166442c93f25",
+    "PrincipalMass.lean": "8acfc7988beb32e567652bcf8a87faaf2aa670011451164220a983fd1eef8769",
+    "SieveWeight.lean": "4deaa5863a06752fdb8244dd66f4c351b6ad47b61e1e21198954642b07486b19",
+    "SignedContrast.lean": "6828e77ff0025a0e7afa0ba6d9bdb885dd86620f82a0741b380039d96550d376",
+    "SingleEndpoint.lean": "b2fbcbb888c9dedf74e663ba7722f63e42b28bf0d252deb26b9b96516000c600",
+    "SquareCutoff.lean": "c5e06f1a44dda532ab2064eb4859cea7cb0556bfb9fcfec111566917a4e872ee",
+    "StepIntegral.lean": "0b4ad90435e91972bc8b992cb06ed79835018a53ee11b45a8a7e9422b00b89d0",
+    "ZeroTriple.lean": "cfddfbaa64baf5da19e11601720c0443429638317861458717587989e9e00ba7",
+    "lakefile.lean": "e8e6e66810cb210915e69b58cbd8977ea6d83332e41ef3eed0abdc2349002cb8",
+    "lake-manifest.json": "6cf329d6e8b898ad9f2edc5275859eb53876569e1b48ef193f12fda347714345",
+    "lean-toolchain": "6d0d484eeae522e854238a3ea3012246c0104d0544e58df340daad3676cc0f78",
+    "example.py": "6663db18408fd6824030c119090624982209fdc1ac8bacb20aa65994b2bcec6d",
+    "verify.py": "8e415286ebbbc27319ab8b5f2a4101ff4042f94d48f1823b0f8c63112e4acf83"
+  },
+  "axioms": {
+    "FixedEven.Cubic.choose_exact_scale": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.choose_scale": [
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.correction_bounds": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.correction_power_support": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.count_error": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.cubic_error_rate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.detected_eq_genuine_of_cube": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.every_target": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.every_target_mangoldt_sqrt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.every_target_single_threshold": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.exact_screen_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.mangoldtObservable_eq_sum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.mangoldt_error": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.mangoldt_error_count": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.mangoldt_error_local_exact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.mem_correction_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.neg_single_le_observable": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.observable_eq_count": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.observable_eq_prime_mass_add_correction": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.observable_exact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.observable_exact_of_central": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.pool_log_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.powerCorrection_eq_log_product": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.prime_mass_eq_neg_single_sub_correction": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.prime_mass_from_single": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.prime_of_rough_below_square": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.prime_pair_mem_exact_screen": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.prime_pair_mem_sqrt_screen": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.representation_of_endpoint_lower": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.representation_of_negative_single": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.representation_of_single_below_correction": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.representation_of_single_below_sqrt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.rough_mu_neg_iff_prime": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.rough_mu_pos_iff_distinctSemiprime": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.screen_spec": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.signed_weight_split": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.single_endpoint_contrast": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.single_eq_neg_mangoldt_of_square": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.single_sqrt_error_every_target": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.single_square_cutoff_error": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.single_square_cutoff_surplus": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.single_square_root_lower": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.square_scale": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.square_weight": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.tail_eq_mu": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.triple_signature": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.two_endpoints": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.uniform_endpoint_error": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "FixedEven.Cubic.uniform_mangoldt_rate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.FourierWindow.dirichletCoeff_star": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.FourierWindow.dirichlet_window_coefficients": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.FourierWindow.dirichlet_window_of_orthogonality": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.FourierWindow.mass_lower_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.FourierWindow.principal_mass": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.FourierWindow.spectral_expand": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.NonprincipalEndpoint.balanced_nonprincipal_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.NonprincipalEndpoint.principal_correction_le_eight": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.NonprincipalEndpoint.reservoir_card": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.NonprincipalEndpoint.reservoir_nonempty": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.NonprincipalEndpoint.reservoir_overhead": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.NonprincipalEndpoint.sum_samples": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.NonprincipalEndpoint.zero_of_six_dvd": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.PrimeCharacter.orthogonality": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.PrimeEndpoint.vonMangoldt_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.PrimeEndpoint.weighted_endpoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.PrimePowerError.divisor_count_pow_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.PrimePowerError.pollution": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.PrimePowerError.pollution_of_base_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.PrimePowerError.rough_divisor_budget": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.PrimePowerError.sieveWeight_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.PrimePowerError.sieveWeight_budget": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.PrimePowerError.sieve_endpoint_prime_error": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.PrimePowerError.sieve_endpoint_sqrt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.PrimePowerError.theta_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.SieveWeight.abs_tail_le_central_choose": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.SieveWeight.attained_at_prime_input": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.SieveWeight.corrected_endpoint_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.SieveWeight.tail_le_envelope": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.SieveWeight.tail_smallRadical": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.StepIntegral.integrated_sieve_endpoint_error": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Goldbach.StepIntegral.measurable_sieveWeight": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  }
+}

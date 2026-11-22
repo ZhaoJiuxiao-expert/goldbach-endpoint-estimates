@@ -1,0 +1,275 @@
+% This is a self-contained LaTeX source. Compile with Tectonic or XeLaTeX.
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=26mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks,unicode]{hyperref}
+\hypersetup{pdftitle={Endpoint estimates for individual even integers in the binary Goldbach problem},pdfauthor={Zixu Zhao},pdfsubject={The binary Goldbach problem, signed sieve weights, and exact prime-power corrections}}
+\urlstyle{same}
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+\widowpenalty=7500
+\clubpenalty=7500
+\title{Endpoint estimates for individual even integers\\in the binary Goldbach problem}
+\author{Zixu Zhao\\[2pt]\small Sichuan University}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+
+Given an even integer, how can one identify a pair of primes in a sum that also counts higher prime powers? We consider this question on the middle third of the interval. An adjacent-endpoint formula for Dirichlet characters lets us evaluate the same Möbius sieve weight at three sifting thresholds. At the lower cube-root threshold, every composite mistakenly detected by a negative sign is a product of three distinct primes, and the error in the unweighted count is $O(N/\log^3 N)$. At a higher cube-root threshold, a combination of two corrected endpoints detects exactly those sifted positions whose complements are prime. The only remaining error comes from higher prime powers in the first coordinate. For each $N\ge4096$, it can be computed term by term and is at most $\lfloor\sqrt{N-2}\rfloor\log 4$. Raising the threshold to just above the square root gives the same exact correction for the original single endpoint. We give proofs, a Lean formalization, and finite examples, and compare the estimates needed for individual targets in the spectral, one-sided sieve, and minor-arc approaches. At the square-root threshold, the original endpoint falls below the negative of the prime-power correction if and only if the central interval contains a representation by two distinct primes. Proving this strict inequality for every sufficiently large even integer remains open.
+
+\end{abstract}
+
+\noindent\textit{Keywords.} Binary Goldbach problem, Möbius function, prime powers, Dirichlet characters, one-sided sieve, Lean formalization
+
+\section{What must be estimated for a given even integer?}
+
+Let $N$ be even. The binary Goldbach conjecture asserts that every $N\ge4$ has a representation $N=p+r$ in which $p,r$ are both prime. We ask whether such a representation exists with distinct primes and with $N/3\le p<2N/3$. Any such pair gives a Goldbach representation. An even integer with no central representation may still have one outside the window, and the coprimality condition in our sieve also discards the diagonal representation $N=2p$. Both restrictions apply throughout the endpoint argument.
+
+For a given $N$, counting the primes $p$ addresses only one part of the problem. One must also determine whether the corresponding integer $N-p$ is prime. Even a result for almost all even integers can leave a specified integer unresolved. Finite computations provide a different kind of evidence. Oliveira e Silva, Herzog, and Pardi verified the conjecture for every even integer from 4 through $4\cdot10^{18}$ [1]. Our finite certificates additionally impose a central window and residue-class restrictions, testing the conclusions of the general argument on explicit integers.
+
+Jiamin Li and Jianya Liu construct a spectral operator for each $N$ and derive a weighted Goldbach asymptotic under the relevant Dirichlet generalized Riemann hypothesis and an additional spectral hypothesis [2]. Alpöge's research note and formal code use ramp sums weighted by Dirichlet characters [3]. The first approach identifies an operator estimate strong enough to yield a positive main term. The second motivated a construction that recovers a signed sieve weight exactly through a difference at adjacent endpoints [4]. Starting from this finite identity, we identify what the endpoint counts and what still calls for an independent estimate of the distribution of primes.
+
+Throughout, $\log$ denotes the natural logarithm, $\mu$ is the Möbius function, and $\Lambda(p^j)=\log p$ for $j\ge1$, with $\Lambda$ vanishing at all other positive integers. We count ordered representations whenever we sum over the first summand. The finite identities and error bounds of Sections 2--5 correspond to the Lean theorems identified in the appendix. Section 6 states the assumptions of the analytic reductions separately. Section 7 gives finite certificates and auxiliary criteria.
+
+\section{Recovering signed sieve weights from nonnegative spectral coefficients}
+
+\textbf{Proposition 1 (endpoint formula).} Let $X\ge2$ be an integer, let $q>X^2$ be prime, and put $h=q-1$. Let $v$ be a real weight supported on a subset of the integers in $[2,X]$. Denote this subset by $S$ and assume that $a<2b$ for all $a,b\in S$. Given $c>0$, index the Dirichlet characters modulo $q$ by $\chi$ and set
+
+\[
+a_\chi=\frac{1}{ch}\left|c+\sum_{n\in S}v(n)\chi(n)\right|^2.
+\]
+
+Character orthogonality gives $\sum_\chi a_\chi\chi(k)=v(k)$ for every integer $2\le k\le X$, including the prescribed zeros off the support. The total mass of the coefficients is $c+V/c$, where $V=\sum_{n\in S}v(n)^2$. When $V>0$, taking $c=\sqrt V$ minimizes the mass within this construction and gives $2\sqrt V$.
+
+\textbf{Proof.} Augment $S$ by the point $1$ and assign it weight $c$. On expanding the squared modulus, orthogonality retains only the terms for which $a\equiv kb\pmod q$. Since $kb\le X^2<q$, the congruence requires the equality of integers $a=kb$. For $k\ge2$, if $b\in S$, then $kb\ge2b>a$. Thus only $b=1,\ a=k$ can contribute. At $k=1$ only the diagonal terms survive, giving the formula for the total mass. This explains why the ratio of any two points in the central interval must be strictly less than 2. Earlier work also gives a lower bound for the worst choice of signs. If $|S|=s\ge1$, there is an assignment of signs for which every interpolant with nonnegative coefficients has total mass at least $\sqrt{s/(2\log(2h))}$. The value $2\sqrt V$ therefore need not be the minimum over all interpolants for a given weight [4].
+
+Let $B_n(y)=(y/n-1)_+$ and write $D_XH=XH(X+1)-(X+1)H(X)$. For each positive integer $n$, direct substitution gives $D_X B_n=\mathbf{1}_{n\le X}$. Center the ramp sums with weights $\Lambda(n)\chi(n)$ in the usual way. The operator $D_X$ annihilates the linear terms for nonprincipal characters, while the $-y\log y$ term for the principal character leaves an explicit correction. Let $H_v$ be the sum of the real parts of the centered ramp sums with coefficients $a_\chi$. Writing $a_0$ for the coefficient of the principal character, we obtain the corrected endpoint
+
+\[
+L(v)=D_XH_v+a_0 X(X+1)\log(1+1/X)=\sum_{n=2}^{X}\Lambda(n)v(n).
+\]
+
+The right-hand side shows that for a fixed arithmetic weight the corrected value is independent of $c$ and of the choice of sufficiently large prime modulus $q$. Every sign criterion below concerns $L(v)$ and includes the principal-character correction.
+
+\textbf{An alternative construction that removes the principal character.} For the central window with $X=N-2$ and $N\ge18$, retain the positions where $\Lambda(n)v(n)\ne0$ and denote their set by $A$. The window contains $M\ge\lfloor N/18\rfloor$ multiples of 6, at all of which $\Lambda$ vanishes. On $A$ retain $v$, assign each of the $M$ multiples of 6 the value $-(c+\sum_Av)/M$, and set the weight equal to zero elsewhere. The new weight gives the same weighted arithmetic sum and has total weight exactly $-c$, so $a_0=0$. Its spectral mass is exactly
+
+\[
+c+\frac{1}{c}\left(\sum_{n\in A}v(n)^2+\frac{(c+\sum_{n\in A}v(n))^2}{M}\right).
+\]
+
+For the original weight with $c=\sqrt V>0$, the principal-character endpoint correction lies between 0 and $8c$. Both estimates concern a single spectral coordinate. The contributions of the remaining characters to the signed sum may still cancel one another.
+
+\section{The cube-root sieve and the exact prime-power correction}
+
+Throughout this section take $N\ge4096$ and $X=N-2$. Write $I=\{n:2\le n\le X,\ N\le 3n<2N\}$ for the central window and put $m=N-n$. Given an integer $z\ge8$, let $S_z$ consist of those positions in $I$ for which $\gcd(n,N)=1$ and every prime factor of $m$ is at least $z$. Take the divisor cutoff $t=\lfloor N/z\rfloor$. On $S_z$ define $w_z(n)=\sum_{d\mid m,\ d>t}\mu(d)$ and set it equal to zero elsewhere. Write $L_z=L(w_z)$ and set
+
+\[
+F_z=\frac{L(w_z^2)-L(w_z)}{2},\qquad P_z=\sum_{\substack{n\in S_z\\ n,\ N-n\ {\rm prime}}}\log n.
+\]
+
+The weight $w_z^2$ is squared pointwise before the corresponding endpoint is formed. If $3z\le N$, every pair of distinct primes in the central window survives the sieve. The logarithmic mass of genuine prime pairs is therefore the same for all such $z$. Put $B_N=\lfloor\sqrt{N-2}\rfloor\log4$.
+
+\textbf{Theorem 2 (Exact cube-root sieve).} If $2N<3z^3$, then $w_z(n)=\mu(N-n)$ at every surviving position in the central window. At such a position, $w_z(n)=-1$ if and only if $N-n$ is prime, and $w_z(n)=1$ if and only if $N-n$ is the product of two distinct primes. The combination of the two endpoints satisfies
+
+\[
+F_z=P_z+\Delta_z,\qquad 0\le\Delta_z\le B_N.
+\]
+
+Here $\Delta_z$ is the sum of $\log p$ over the prime powers $p^j\in S_z,\ j\ge2$ for which $N-p^j$ is prime. This correction can be computed without first finding any prime pair for $N$.
+
+\textbf{Proof.} Since $m>N/3$ and $z\ge8$, we have $t<m$. If $d$ is a proper divisor of $m$, the quotient $m/d>1$ has a prime factor of size at least $z$, so $d\le N/z$. Thus the only term left in the truncated divisor sum is the one indexed by $m$ itself. Moreover, $m\le2N/3<z^3$, so $m$ has at most two prime factors counted with multiplicity. A prime therefore has weight $-1$, a product of two distinct primes has weight $1$, and a prime square has weight zero. On these three values, $(w^2-w)/2$ is precisely the indicator of a negative weight. It follows that $F_z$ sums $\Lambda(n)$ over exactly the surviving positions whose complementary integer is prime.
+
+The terms in this sum with prime first coordinate contribute $P_z$. All remaining nonzero terms have $n=p^j$ with $j\ge2$, so $p\le\sqrt X$. Two distinct powers of the same prime differ by a factor of at least 2, whereas the ratio of any two positions in $I$ is strictly less than 2. Thus each base contributes at most once. The elementary prime-product bound $\prod_{p\le b}p\le4^b$ gives $\Delta_z\le\sum_{p\le\sqrt X}\log p\le B_N$. More precisely, $\Delta_z$ is the natural logarithm of the product of all retained bases, with the empty product taken to be 1.
+
+\textbf{Choice of sieve level and a single-endpoint criterion.} Let $u$ be the largest integer such that $8u^3\le N$. Then $u\ge8$ and $N<8(u+1)^3\le27u^3$. Taking $z=3u$ gives $N<z^3\le4N$ and $3z\le N$, an explicit choice for each $N$. For every integer $w$, we have $w(w+1)\ge0$. Multiplying by $\Lambda(n)\ge0$ and summing yields $-L_z\le F_z$, hence
+
+\[
+P_z\ge -L_z-\Delta_z\ge -L_z-B_N.
+\]
+
+Consequently, $L_z<-\Delta_z$ suffices for the existence of a prime pair. To see what arithmetic information this condition requires at this scale, let $Q_z$ be the sum of $\log n$ over the positions in $S_z$ with prime first coordinate for which the complementary integer is a product of two distinct primes. The pointwise classification also gives
+
+\[
+\left|L_z-(Q_z-P_z)\right|\le B_N.
+\]
+
+Indeed, the terms with prime first coordinate contribute exactly $Q_z-P_z$. For the remaining prime powers, each base occurs with a sieve weight of absolute value at most 1. Thus the single-endpoint approach requires control of the difference between the contributions from prime complements and those from products of two distinct primes for the same $N$.
+
+\section{The square-root sieve and the lower cube-root sieve}
+
+\textbf{Theorem 3 (Error of the original single endpoint for each target).} Take $z=\lfloor\sqrt N\rfloor+1$. Then $3z\le N$ and $N<z^2$. Every surviving $m=N-n>1$ is prime, since a composite integer has a prime factor at most its square root. Thus $w_z$ is identically $-1$ on $S_z$ and zero off its support, giving $F_z=-L_z$. Theorem 2 immediately yields
+
+\[
+P_z=-L_z-\Delta_z,\qquad 0\le-L_z-P_z\le B_N.
+\]
+
+In particular, $L_z<-\Delta_z$ is equivalent to the existence of a pair of distinct primes in the central window. This equivalence shows the limitation of the square-root sieve. It identifies and removes every excess contribution, but at this depth a central position coprime to $N$ survives precisely when its complementary integer is prime. Recomputing the endpoint from the same sifted data cannot independently establish that it lies strictly below the threshold for every large even integer.
+
+\textbf{Theorem 4 (Products of three primes counted by the lower cube-root sieve).} Now take $z=u$, retaining $t=\lfloor N/z\rfloor$. Let $D_z$ be the number of ordered positions with prime first coordinate and $w_z=-1$, and $G_z$ the number of genuine prime pairs among them. Let $M$ be the number of primes in the interval $[z,\lfloor N/z^2\rfloor]$. Then
+
+\[
+0\le D_z-G_z\le\binom{M}{3},\qquad (D_z-G_z)(\log N)^3\le(135\log4)^3 N.
+\]
+
+\textbf{Proof.} We still have $w_z(n)=\mu(m)$ on the sifted set, but $m$ can now exceed $z^3$. Since $N<27z^3<z^5$, any surviving composite with $\mu(m)=-1$ is squarefree and has an odd number of distinct prime factors, at least three and fewer than five. It is therefore the product of exactly three distinct primes. Each factor is at least $z$ and the product of the other two is at least $z^2$, so each factor is at most $\lfloor N/z^2\rfloor$. An unordered triple determines $m$ uniquely, and hence also $n=N-m$. This proves the binomial bound.
+
+Now put $b=\lfloor N/z^2\rfloor$. By the prime-product bound, $M\log z\le b\log4$. Since $b<27z$ and $\log N<5\log z$, we have $M\log N\le135z\log4$. The second inequality follows from $\binom M3\le M^3$ and $z^3\le N$. Returning to the two $\Lambda$-weighted endpoints, each spuriously counted prime first coordinate contributes at most $\log N$. Adding the error from higher prime powers in the first coordinate yields
+
+\[
+0\le F_z-P_z\le \frac{(135\log4)^3 N}{(\log N)^2}+B_N.
+\]
+
+The triple bound retains the actual size of the pool of possible prime factors, while the bound with the explicit constant makes the order in logarithms visible. At this lower sieve level, attributing all the error to prime powers would miss the contributions from products of three distinct primes that do occur.
+
+\section{Arbitrary cutoffs and a numerical example}
+
+\textbf{Lemma 5 (The divisor tail at an arbitrary cutoff).} Let $m\ge2$ and $t\ge0$ be integers, put $T_m(t)=\sum_{d\mid m,\ d>t}\mu(d)$, and let $k=\omega(m)$ be the number of distinct prime factors. Then
+
+\[
+\left|T_m(t)\right|\le\binom{k-1}{\lfloor(k-1)/2\rfloor}.
+\]
+
+Let $\ell$ be the least prime factor of $m$. Pair every squarefree divisor $d$ not divisible by $\ell$ with $\ell d$. The two terms have opposite signs, so only the pairs with $t/\ell<d\le t$ make a nonzero net contribution to the tail. For two strictly nested subsets of prime factors, the ratio of their products is at least $\ell$, so both products cannot lie in this interval. The surviving subsets form an antichain, and Sperner's theorem [5] gives the stated bound. For example, take $N=2306,\ n=1151,\ t=11$. Here $n$ is a prime in the central window and $m=1155=3\cdot5\cdot7\cdot11$. The only squarefree divisors at most 11 are 1 and these four primes. Hence $T_{1155}(11)=3$, attaining the bound. At an arbitrary cutoff the tail need not take one of the values $0$ or $\pm1$.
+
+For $t\ge1$, it suffices to retain the distinct prime factors at most the cutoff. Let $r$ be their product. If $r>1$, the sum of the Möbius function over all divisors vanishes. Writing the tail as the negative of the sum over divisors at most the cutoff gives $T_m(t)=T_r(t)$. In particular, the tail vanishes when $1<r\le t$. If $r=1$, only the divisor 1 contributes to the lower sum, so $T_m(t)=-1$.
+
+\textbf{Error for a continuously varying cutoff.} In the central window, take any real cutoff $t$ and roughness parameter $y>1$, requiring the least prime factor of a surviving complementary integer to exceed $y$. If $N\le y^K$ for a positive integer $K$, every surviving $m$ has at most $K$ distinct prime factors, and hence its tail has absolute value at most $2^K$. Let $E(t)$ be the corrected endpoint for this weight and $J(t)$ the corresponding sum restricted to prime first coordinates with their logarithmic weights. The argument that each base occurs at most once gives $|E(t)-J(t)|\le2^K B_N$ for each $N,t$. The cutoff weights are finite step functions, so for $0<a\le b$ the two integrals exist and satisfy
+
+\[
+\left|\int_a^b E(t)\frac{dt}{t}-\int_a^b J(t)\frac{dt}{t}\right|
+\le 2^K B_N\log(b/a).
+\]
+
+For example, fix $\varepsilon>0$, take $y=N^\varepsilon$, and choose $K\ge1/\varepsilon$. When $1\le a\le b\le N$, the integrated error from prime powers in the first coordinate is $O_\varepsilon(\sqrt N\log N)$. This estimate holds for arbitrary cutoffs. Composite complementary integers may still contribute.
+
+\textbf{Numerical example.} Table 1 uses $N=4800$ throughout. The quantities $D_z,G_z$ count ordered positions, and $L_z,F_z,P_z$ are logarithmically weighted sums. The table gives decimals to four places. Direct comparisons apply to quantities in the same units.
+
+\begin{center}\small
+\textbf{Table 1.} Endpoint values for the same even integer at three sieve levels
+\par\smallskip
+\renewcommand{\arraystretch}{1.19}\setlength{\tabcolsep}{5pt}
+\begin{tabular}{rrrrrrr}\hline
+\shortstack[r]{Sieve level\\ $z$} & \shortstack[r]{Cutoff\\ $t$} & \shortstack[r]{Detected\\ $D_z$} & \shortstack[r]{Genuine\\ $G_z$} & \shortstack[r]{Single endpoint\\ $L_z$} & \shortstack[r]{Combination\\ $F_z$} & \shortstack[r]{Prime-pair mass\\ $P_z$} \\
+\hline
+8 & 600 & 89 & 88 & \ensuremath{-}108.9621 & 700.4928 & 683.3416 \\
+24 & 200 & 88 & 88 & \ensuremath{-}484.0523 & 692.8513 & 683.3416 \\
+70 & 68 & 88 & 88 & \ensuremath{-}692.8513 & 692.8513 & 683.3416 \\
+\hline
+\end{tabular}\end{center}
+
+The extra prime counted in the first row is 2083, whose complement is $2717=11\cdot13\cdot19$. The sieve in the second row removes this triple product. The first coordinates still include the three higher powers $41^2,\ 47^2,\ 7^4$. Their complements are 3119, 2591 and 2399, respectively, all prime. The exact correction in each of the last two rows is therefore $\Delta_z=\log(41\cdot47\cdot7)=\log13489$, approximately 9.5096. The second row already satisfies $L_z<-69\log4$, and in the third row we also have $L_z=-F_z$. The verification program checks the strict inequality in the second row by comparing integer products, so its sign is independent of rounding.
+
+\section{From bounds on false positives to positivity for each even integer}
+
+\subsection{Two error terms}
+
+Let $\mathfrak S(N)$ denote the binary Goldbach singular series. For even $N$, its usual normalization is $2C_2\prod_{p\mid N,\ p>2}(p-1)/(p-2)$, where $C_2=\prod_{p>2}(1-1/(p-1)^2)>0$ and both products run over primes. Jiamin Li and Jianya Liu use a smooth nonnegative weight $\phi$ supported in the central window. Write $G_\phi(N)$ for their smoothed, normalized Goldbach sum. Their Theorem 7.1 expresses the remainder as the following quadratic form evaluated at a specified vector.
+
+\[
+c_\phi\mathfrak S(N)-G_\phi(N)=\langle T_Nv_N,v_N\rangle.
+\]
+
+Here $c_\phi=\int\phi^2>0$. The local generalized Riemann hypothesis $\mathrm{GRH}(N)$ in their manuscript applies, for each conductor dividing $N$, to the primitive Dirichlet $L$-functions of that conductor. For a function $h(N)\to\infty$ chosen in advance, set $\eta_N=h(N)^2(\log N)^3/[N\mathfrak S(N)]\le1/4$. In the framework of [2], Hypothesis S requires a certain spectral function to have no zeros in the prescribed right half-plane for each sufficiently large even integer satisfying the local generalized Riemann hypothesis. The equivalent norm bound is
+
+\[
+\|T_N\|\le\frac{\mathfrak S(N)}{2h(N)\sqrt{1-\eta_N}}.
+\]
+
+Under these hypotheses, their Theorem 1.1 gives $G_\phi(N)=c_\phi\mathfrak S(N)+O_\phi(\mathfrak S(N)/h(N))$ [2]. This estimate compares the actual count with a known positive main term. In Theorems 2 and 3 of the present paper, $\Delta_z$ compares the endpoint value with the weighted count of genuine prime pairs. This latter error can vanish even when both quantities are zero. It therefore does not establish Hypothesis S. To obtain one prime pair, a strict one-sided bound in the chosen direction suffices. A bound on the operator norm controls every direction.
+
+The window condition in Alpöge's source code has different quantifiers. Once a family of characters has been fixed, a window can be chosen beyond any prescribed lower bound such that a one-sided majorant on the window satisfies an integral estimate [3]. Here the character family depends on $N$ and on the sieve weight, and the required points are prescribed in advance as $X=N-2$ and $X+1$. The existence of distant windows alone gives no upper bound for the difference at those two points. For example, the continuous function $H_A(s)=-A(1-2|s-X|)_+$ has the zero function as a global majorant, yet $D_XH_A=(X+1)A$ can be arbitrarily large. This example concerns a general one-sided window condition. The arithmetic structure of genuine character ramp sums remains available for sharper estimates.
+
+\textbf{How narrow a window can a fixed test direction resolve?} The preliminary analytic argument polarizes the quadratic form in [2]. One test function is a smooth nonnegative weight supported on an interior interval of length comparable to $w$. The other is fixed and identically one on the reflected interval. Their test norms are $O(w^{-1/2})$ and $O(1)$, respectively. Under the local generalized Riemann hypothesis and Hypothesis S, the normalized main term has order $\mathfrak S(N)w$. The operator error is $O(\mathfrak S(N)/(h(N)\sqrt w))$, and removing higher prime powers costs a further $O((\log N)/\sqrt N)$. Thus this test resolves a window of width a sufficiently large constant multiple of $h(N)^{-2/3}$, still under Hypothesis S.
+
+A further test uses the sign of the model operator $M_N=D_N+K_N$. For a compact self-adjoint operator $M_N$, its distance in operator norm from the positive semidefinite operators of rank at most $r$ is the larger of the norm of its negative part and the positive eigenvalue indexed by $r+1$, with the eigenvalue list padded by zeros. Retaining the first $r$ positive eigendirections attains this distance. In the construction of Li and Liu, the approximating operator is prescribed by the characters, so the existence of a best approximation alone does not give Hypothesis S. The preliminary notes also consider shifting the left boundary of the spectral strip and changing the auxiliary prime modulus. Shifting the boundary improves a norm estimate with a decay factor, but that estimate does not transfer directly to the original test space. After character orthogonality, changing the modulus gives the same convolution value, and the remaining terms require additional phase cancellation. The supplementary material gives the hypotheses and calculations.
+
+\subsection{A grid of cutoffs for the one-sided sieve}
+
+A different approach avoids the full operator norm. We now sum over primes throughout the full range, lifting the restriction that the first coordinate lie in the central window. Fix a sufficiently small $\varepsilon>0$ and put $y=N^\varepsilon$. A starred sum runs over primes $p\le N-2$ such that $p\nmid N$ and the least prime factor of $m=N-p$ exceeds $y$. Write
+
+\[
+R=\sum_p^*(\log p)\Lambda(m),\qquad C_N(t)=\sum_p^*(\log p)\,T_m(t).
+\]
+
+To define $A_D$, sum over the same primes $p$, taking the sum of $(\log p)\mu(d)\log(D/d)$ over divisors $d\mid m,\ d\le D$ for each prime. Since $\sum_{d\mid m}\mu(d)=0$ and $-\sum_{d\mid m}\mu(d)\log d=\Lambda(m)$, termwise integration yields
+
+\[
+R=A_D-\int_D^N C_N(t)\,\frac{dt}{t}.
+\]
+
+Take $D=N^{0.49}$ and $T=N^{1-2\varepsilon}$. Using a main-term estimate for the short divisor sum [6], the distribution of primes in arithmetic progressions, and an upper-bound sieve, the preliminary research notes derive $A_D>0.999N\mathfrak S(N)$ and show that the integral from \emph{T} to \emph{N} is strictly smaller than $0.9112N\mathfrak S(N)$. Here $\varepsilon$ is first fixed sufficiently small, after which $N$ is taken sufficiently large. These numerical bounds are inputs to the analytic argument in the supplement and have not been formalized in Lean. Under these bounds, if a large even integer had no prime pair, $R$ would receive contributions only from higher prime powers and would be $O(\sqrt N\log^2N)$. The integral over the middle range would consequently have to exceed $0.0877N\mathfrak S(N)$.
+
+Set $f_N(x)=C_N(N^x)\log N/[N\mathfrak S(N)]$ for $x$ in $[0.49,1-2\varepsilon]$. Suppose that its total variation is $V$, the largest grid-cell width is $\delta$, and every cell contains a point at which $f_N\le a$. Bounding the function on each cell by its value at that point plus its oscillation gives
+
+\[
+\int_{0.49}^{1-2\varepsilon}f_N(x)\,dx\le a(0.51-2\varepsilon)+\delta V.
+\]
+
+With $a=0.10$ and $\delta V\le0.01$, the right-hand side is less than 0.061, contradicting the lower threshold of 0.0877 for a possible exception. Lean verifies the finite discrete version of the total-variation estimate and the resulting implication across the grid. The analytic notes obtain a negative major-arc contribution for each target, while short-interval averages can bound the size of the exceptional set. Some grid cells below the square-root scale can be treated separately, as can moduli above that scale that admit a suitable three-factor decomposition. The latter estimate uses Maynard's distribution theorem for large moduli [7]. The remaining problem is to find a suitable cutoff in every cell for each potentially exceptional $N$. The cube-root sieve level in Section 3 supplies only one cutoff. The rest of the grid still requires estimates.
+
+Discarding all negative terms loses the cancellation this approach requires. By pairing complementary divisors, the research notes reduce the problem further to a difference of two integrals. The first comes from squarefree composites with an odd number of prime factors in the central half-band. The second comes from terms with an even number of prime factors in the adjacent interval. In the normalization of the notes, a hypothetical exception would force the difference above 0.090. A bound of 0.089 for each such target would exclude it. This gives another criterion whose hypothesis remains open. The conditional result of Huang and Li for sufficiently large even integers uses both the usual Elliott--Halberstam hypothesis and a Möbius-twisted variant, with the two levels of distribution summing to more than 1 [8]. Their result also motivates studying the sign information required by the fixed reflection $p\mapsto N-p$.
+
+\section{Finite certificates and further criteria}
+
+\textbf{Finite range.} An earlier Lean project verified the existence of a prime pair for each of the 499,999 even integers $4\le N\le10^6$. For each of the 496,873 even integers $6256\le N\le10^6$, both primes can also be required to lie in the closed interval $[N/3,2N/3]$, with each residue modulo 72 belonging to
+
+\[
+\{5,7,11,13,23,29,31,43,47,59,61,67\}.
+\]
+
+For example, $6256=2237+4019$ satisfies these restrictions. The neighboring integer $6254=2143+4111$ has an ordinary representation but none satisfying all the additional conditions. The sieve modulo 72 excludes squares and cubes, so any composite prime power it counts has exponent at least 5. The finite certificates use a closed window, whereas the endpoint formulas in Sections 2--5 use a window open at the right endpoint. To join an asymptotic proof to a finite certificate, one must also give an effective starting point for the analytic criterion and verify that the two ranges meet.
+
+\textbf{A prime-power correction modulo 3.} Suppose $N\equiv4\pmod6$ and a representation by prime powers in the closed central window contains a power with even exponent. Then at least one summand is a power of 3. Indeed, an even power of a prime other than 3 is congruent to 1 modulo 3, as is the target. The central window contains at most one power of 3, so at most one unordered representation is of this type. Put $l=\lfloor\log_2 N\rfloor$ and $d_j=2^{\lfloor l/j\rfloor+1}$. Counting possible bases for cubes and for odd exponents of at least five then gives the upper bound $1+d_3+l d_5$ for the number of representations containing a composite prime power. If the number of distinct unordered representations by prime powers in the central window exceeds this bound, at least one is a genuine prime pair. The existence of sufficiently many prime-power representations remains a hypothesis.
+
+\textbf{The energy of an empty window.} In a window with $v$ steps, the cumulative count is constant if the window contains no prime pair. After a linear baseline of integer slope $d$ is subtracted, the discrepancies satisfy $s_i=s_0-id$. The sum-of-squares formula gives the exact identity
+
+\[
+12\sum_{i=0}^{v}s_i^2=d^2v(v+1)(v+2)+3(v+1)(2s_0-vd)^2.
+\]
+
+If the energy of the actual discrepancies lies strictly below the resulting lower bound for an empty window, the window contains a representation. This criterion has been formalized. A strict energy bound for the actual sequence of primes is still needed.
+
+\textbf{Local density and reflected pairs.} Omit the midpoint from a closed central window symmetric about $N/2$. For each pair $\{n,N-n\}$, choose its left member with probability $\alpha$, its right member with the same probability, and neither with probability $1-2\alpha$. Make these choices independently across pairs, with $0<\alpha\le1/2$. The resulting set contains no two elements summing to $N$. Consider any arithmetic progression in the window with $m$ terms after the midpoint has been omitted. The expected number of selected terms is $\alpha m$. Each reflected pair contributes at most one selected element to the progression, so Hoeffding's inequality [9] bounds the probability of a deviation larger than $2\sqrt{m\log(N+1)}$ by $2(N+1)^{-8}$. There are at most $(N+1)^3$ nonempty arithmetic progressions in the window. Hence there is a choice satisfying the discrepancy bound on every progression and still containing no pair for the given target. This artificial set depends on $N$ and illustrates the additional arithmetic information needed to connect local densities to a reflected correlation.
+
+Reduction modulo 3 also tests proposed asymptotic formulas. Every prime greater than 3 is congruent to 1 or 2 modulo 3. A target congruent to 0 modulo 3 admits two ordered pairs of residue classes. Each of the other two target classes admits only one. By the prime number theorem in arithmetic progressions for a fixed modulus and a rectangular approximation to the triangle $p+r\le X$, the four ordered combinations of prime residue classes have asymptotically equal counts. The cumulative representation counts for the three target classes therefore have limiting proportions $2:1:1$. A formula using the same coefficient for all even integers and omitting local factors would instead predict $1:1:1$. This test rules out an unsuitable main term without deciding whether a particular target has a representation.
+
+\section{Conclusion}
+
+The arguments identify which integers contribute to the endpoint for each even target in the problem suggested by the spectral hypothesis. At the lower cube-root sieve level, the only composite complementary integers incorrectly selected by the negative sign are products of three distinct primes. At the higher cube-root level, the two-endpoint combination removes these composites, and its remaining excess can be computed one prime power at a time. At the square-root level, the negative of the single endpoint differs from the mass of genuine central prime pairs by exactly the same correction. The example $N=4800$ identifies the individual contributions removed in these three steps.
+
+Proving that every sufficiently large even integer has a representation still requires an estimate for each target independent of enumerating genuine prime pairs. At the higher cube-root scale, one could seek a direct proof of $L_z<-\Delta_z$ from character sums. In the full-range sieve one could instead seek sufficient cancellation at some cutoff in every grid cell for each potentially exceptional target. These approaches specify the quantities to be estimated, the signs needed, and the order of the quantifiers. Neither the square-root error bound nor the finite certificates alone ensure that the mass of central prime pairs is strictly positive.
+
+\section*{Appendix. Formalization and verification materials}
+
+The supplement contains three independently verifiable collections. The first contains 34 modules and finite certificates covering the range up to one million, the criterion modulo 3, local energy, and discrete results on total variation across cutoffs. The two projects from the earlier work on positive-definite extension comprise 14 modules and axiom reports for 36 public declarations. They cover spectral interpolation, the worst-case lower bound for the mass, and the ramp difference. The endpoint project for individual even integers contains 19 modules, five reused from the earlier work. Its build and 81 axiom checks were rerun during preparation of this paper and reproduced the archived record. It uses Lean 4.13.0, with the Mathlib version pinned by the lockfile. The module counts for these collections overlap.
+
+Theorem 2 corresponds to the files ExactCutoff, ZeroTriple, and ExactPollution. SignedContrast gives the decomposition into positive and negative complementary terms. Theorem 3 is in SquareCutoff, and Theorem 4 is in CubicEndpoint, CubicRate, and MangoldtRate. The antichain bound for arbitrary cutoffs is in SieveWeight, and the integrated bound for prime powers is in StepIntegral. SingleEndpoint verifies the sufficient condition for a prime pair in terms of a negative endpoint. The values in Table 1 can be recomputed from the accompanying integer example. The research notes on spectral operators, sieve asymptotics, and minor-arc exceptional sets are provided separately as analytical derivations.
+
+\section*{References}
+\begingroup\small
+
+\par\smallskip\noindent\hangindent=1.8em\hangafter=1\makebox[1.8em][l]{[1]}Oliveira e Silva, T., Herzog, S., Pardi, S. Empirical verification of the even Goldbach conjecture and computation of prime gaps up to $4\cdot10^{18}$. Mathematics of Computation, 83 (2014), 2033--2060. \href{https://sweet.ua.pt/tos/bib/4.12.html}{Author's publication page}
+
+\par\smallskip\noindent\hangindent=1.8em\hangafter=1\makebox[1.8em][l]{[2]}Li, J., Liu, J. A Conditional Proof of the Goldbach Conjecture. Preprint, Mathematics Research Center, Shandong University, 2026. See Hypothesis S, equation (2.28), and Theorems 1.1 and 7.1. \href{https://mrc.sdu.edu.cn/__local/6/14/8E/28753731EE31D7635BAF60732C2_0C644604_2CE958.pdf}{Manuscript}
+
+\par\smallskip\noindent\hangindent=1.8em\hangafter=1\makebox[1.8em][l]{[3]}Alpöge, L. Research notes, p. 3, and the definition of CharFamily in the accompanying Lean library. 2026. \href{https://alpo.ge/remark.pdf}{Author's notes}. \href{https://github.com/CocoSgt/riemann-hypothesis-lean/blob/7cbf7a0c32fca1badf05931879a37c3f8a2b03b4/src/Development/AutomorphicArithmetic/DedekindLFunctions/CharFamily.lean\#L9-L41}{Source at the cited revision}
+
+\par\smallskip\noindent\hangindent=1.8em\hangafter=1\makebox[1.8em][l]{[4]}Zixu Zhao. Positive-definite extensions of signed weights on multiplicative intervals and an endpoint formula for prime-weighted sums. Zenodo preprint, 2026. See Theorem 1, Proposition 2, Lemma 3, and Theorem 4. \href{https://doi.org/10.5281/zenodo.24439399}{Paper and accompanying code}
+
+\par\smallskip\noindent\hangindent=1.8em\hangafter=1\makebox[1.8em][l]{[5]}Sperner, E. Ein Satz über Untermengen einer endlichen Menge. Mathematische Zeitschrift, 27 (1928), 544--548. \href{https://doi.org/10.1007/BF01171114}{Journal article}
+
+\par\smallskip\noindent\hangindent=1.8em\hangafter=1\makebox[1.8em][l]{[6]}Goldston, D. A., Yıldırım, C. Y. Higher correlations of divisor sums related to primes I: triple correlations. See Lemma 2.1. \href{https://arxiv.org/abs/math/0111212}{Authors' preprint}
+
+\par\smallskip\noindent\hangindent=1.8em\hangafter=1\makebox[1.8em][l]{[7]}Maynard, J. Primes in arithmetic progressions to large moduli III: Uniform residue classes. See Theorem 1.2. \href{https://arxiv.org/abs/2006.08250}{Author's preprint}
+
+\par\smallskip\noindent\hangindent=1.8em\hangafter=1\makebox[1.8em][l]{[8]}Huang, J.-J., Li, H. On the connection between the Goldbach conjecture and the Elliott-Halberstam conjecture. arXiv:2005.03811v2, 2022. \href{https://arxiv.org/abs/2005.03811v2}{Authors' preprint}
+
+\par\smallskip\noindent\hangindent=1.8em\hangafter=1\makebox[1.8em][l]{[9]}Hoeffding, W. Probability inequalities for sums of bounded random variables. Journal of the American Statistical Association, 58 (1963), 13--30. \href{https://doi.org/10.1080/01621459.1963.10500830}{Journal article}
+
+\endgroup\medskip
+
+\textbf{Supplementary material.} \href{https://github.com/ZhaoJiuxiao-expert/goldbach-endpoint-estimates/blob/main/lean-source.zip}{Lean source, finite certificates, and analytic research notes}.
+
+\end{document}

@@ -1,0 +1,19 @@
+Rights for the deposited files
+
+Author: Zixu Zhao (Sichuan University), 2026.
+
+Manuscripts
+The English and Chinese manuscript texts, as provided in papers/paper-en.pdf,
+papers/paper-zh.pdf and the corresponding English manuscript source
+papers/paper-en.tex, are licensed under the Creative Commons Attribution 4.0
+International License (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+Lean source and accompanying reproducibility materials
+For original material in lean-source.zip and its expanded copy under lean/,
+the rights holder grants GitHub and Zenodo nonexclusive permission to preserve,
+reproduce and publicly distribute the deposited material. All other rights
+are reserved. This applies also to the source archive embedded in the Chinese
+PDF. Third-party material remains subject to its existing terms. Rights
+notices accompanying earlier work are retained in the archive.
+

@@ -1,0 +1,177 @@
+{
+  "version": "Lean (version 4.13.0, x86_64-w64-windows-gnu, commit 6d22e0e5cc5a, Release)",
+  "modules": {
+    "Foundations": {
+      "elapsed_seconds": 0.45,
+      "sha256": "fb9f25333d5ff10726bf774064dd1c3339dba614a961ad5d518091ef30666c20",
+      "output": ""
+    },
+    "Residues": {
+      "elapsed_seconds": 1.37,
+      "sha256": "edf91450797f4f672dd1df6ac39efa1761807d90867c3076b975545081255d20",
+      "output": ""
+    },
+    "FilterCriterion": {
+      "elapsed_seconds": 0.78,
+      "sha256": "15a599f930fdd8e2e59a517faab3b8e3736386b6074be30c4cd8537e76b75a44",
+      "output": ""
+    },
+    "RoughParity": {
+      "elapsed_seconds": 0.81,
+      "sha256": "1bb1262ab661cdd0e26e122601a19891d729849b77eb97decc5a9dea68d433a3",
+      "output": ""
+    },
+    "Certificates": {
+      "elapsed_seconds": 0.96,
+      "sha256": "4f8a49d4c167eb957f7a6d443250ef6661907dda5d517c344ff8dbe4db5260c9",
+      "output": ""
+    },
+    "Lift": {
+      "elapsed_seconds": 1.55,
+      "sha256": "c409bcae8a569075d926e291151f8bd81790d7078b8cbb92f326c23c7a38a9ea",
+      "output": ""
+    },
+    "MobiusCutoff": {
+      "elapsed_seconds": 1.09,
+      "sha256": "1686ad61d787552eb08f6e51e26047a2f7f3c3039f218543ecf0e6a2f3b56eaf",
+      "output": "'Goldbach.MobiusCutoff.large_divisor_iff_moving_cut' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.MobiusCutoff.complementary_divisor' depends on axioms: [propext, Quot.sound]\n'Goldbach.MobiusCutoff.divisor_sum_complement' depends on axioms: [propext, Quot.sound]\n'Goldbach.MobiusCutoff.switched_sum' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.MobiusCutoff.full_divisor_switch' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.MobiusCutoff.wide_endpoint_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.MobiusCutoff.example_mobius_value' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.MobiusCutoff.arithmeticMobius_divisor_sum' depends on axioms: [propext, Quot.sound]\n'Goldbach.MobiusCutoff.dominant_prime_divisor_cut' depends on axioms: [propext, Quot.sound]\n'Goldbach.MobiusCutoff.dominant_prime_mobius_cut_zero' depends on axioms: [propext, Quot.sound]\n'Goldbach.MobiusCutoff.dominant_prime_mobius_tail_zero' depends on axioms: [propext, Quot.sound]\n'Goldbach.MobiusCutoff.dominant_prime_square_cut' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.MobiusCutoff.dominant_prime_mobius_square_zero' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    },
+    "Incidence": {
+      "elapsed_seconds": 0.46,
+      "sha256": "22515803f604b2a1a359de3e331220b424d03c974022a625137fb04ab030ea63",
+      "output": ""
+    },
+    "Cutoff": {
+      "elapsed_seconds": 1.17,
+      "sha256": "4e6312fa28cc7914ce261d20a6544e77720eb31f50cf4f3a8232c4dba9e200a6",
+      "output": ""
+    },
+    "Blocks/Low": {
+      "elapsed_seconds": 8.56,
+      "sha256": "c5bbecdad3c6799d0a528686548fa2625f08254272287d775b1d0a8d9520a3f5",
+      "output": ""
+    },
+    "Blocks/Segment01": {
+      "elapsed_seconds": 123.78,
+      "sha256": "1ef7827fd6904b9e54bfecc1dc746a3e139b6071a2a16affa98ed04e10bbad69",
+      "output": ""
+    },
+    "Blocks/Segment00": {
+      "elapsed_seconds": 123.87,
+      "sha256": "9f60d04bc2e00e6ff2c1ef5ecfd3e2b27de7c6e0a110735c0413ff782c5189a8",
+      "output": ""
+    },
+    "Blocks/Segment02": {
+      "elapsed_seconds": 124.82,
+      "sha256": "69bb02636a4d424e579029c2ec915e905ade8ed85d6e26b112dcf7a10aa22504",
+      "output": ""
+    },
+    "Blocks/Segment03": {
+      "elapsed_seconds": 123.7,
+      "sha256": "b05f58520f6652296e67b7d8f34ed72a3225a5a8c46b994ba1e7cbd59345afef",
+      "output": ""
+    },
+    "Blocks/Segment04": {
+      "elapsed_seconds": 123.77,
+      "sha256": "8c7da48323e74c5eadd84ed79bfaa5bfffaf28ba282df1c707630cce230c81ce",
+      "output": ""
+    },
+    "Blocks/Segment05": {
+      "elapsed_seconds": 124.71,
+      "sha256": "155a3fc94c42a3ec8c6fa744a0443e46694547d5c97e3a6c241b0cf56281d807",
+      "output": ""
+    },
+    "Blocks/Segment06": {
+      "elapsed_seconds": 124.03,
+      "sha256": "f852ec746198dbc3e155958c6bbfeebc44c6b5f9da39b8317b2d2b2b3d6c1630",
+      "output": ""
+    },
+    "Blocks/Segment07": {
+      "elapsed_seconds": 124.78,
+      "sha256": "0ca48f2e1eb24768db9653b042a1747f7532202bebdaef9f7cf803460b352641",
+      "output": ""
+    },
+    "Blocks/Segment08": {
+      "elapsed_seconds": 125.78,
+      "sha256": "dfe7138534f093c5d541400ef544dd5982913740aa4d13ab08a1d85a7c3ac298",
+      "output": ""
+    },
+    "Blocks/Segment09": {
+      "elapsed_seconds": 125.08,
+      "sha256": "e88f4ce3fa467098a7b73f00f47ed45609b687d92cc03feb916de695979823ea",
+      "output": ""
+    },
+    "Blocks/Segment10": {
+      "elapsed_seconds": 125.65,
+      "sha256": "f6b0ef3226cbba140c775fa9b4a1ae7c016715f496aa98235c51110470e3a9d4",
+      "output": ""
+    },
+    "Blocks/Segment11": {
+      "elapsed_seconds": 125.42,
+      "sha256": "eaaf68dbeec22333146aa5e47419ec4c1049b29aeaa92d7b02bc00c67941dba2",
+      "output": ""
+    },
+    "Blocks/Segment15": {
+      "elapsed_seconds": 20.44,
+      "sha256": "3789a9184110d193630f657cb239b4bca15e40971d7085ee3f75857d6135f553",
+      "output": ""
+    },
+    "Blocks/Segment12": {
+      "elapsed_seconds": 120.41,
+      "sha256": "85dea53d7fc2ec36ed7ec2e901f4de40031da16e2aa3b0c8d03e0f9db2d1b2c3",
+      "output": ""
+    },
+    "Blocks/Segment13": {
+      "elapsed_seconds": 120.46,
+      "sha256": "7cdbc3baafea03d9b191affd38be56a9b144decb4836a5f611e123e25f23996d",
+      "output": ""
+    },
+    "Blocks/Segment14": {
+      "elapsed_seconds": 120.35,
+      "sha256": "8dcf0e70796dbfc2cf233fab35218fc6a3ad3edad0fa4916b5de47120a75d805",
+      "output": ""
+    },
+    "FiniteRange": {
+      "elapsed_seconds": 0.64,
+      "sha256": "487126e24992dd282baa969ef69d71d5a131885cd1c31f97f0d63414fe2225b5",
+      "output": ""
+    },
+    "CenteredFour": {
+      "elapsed_seconds": 0.89,
+      "sha256": "33733e35626a615d61969afdb841730aab8676004cb7ce577ce1ede4a13f048a",
+      "output": "'Goldbach.CenteredFour.centered_four' depends on axioms: [propext, Quot.sound]"
+    },
+    "ModThree": {
+      "elapsed_seconds": 1.05,
+      "sha256": "e6953bddce565f36f9392d79cc25709ae0612c4ff638c9b1866245a8b580a2c3",
+      "output": ""
+    },
+    "EndpointMajorant": {
+      "elapsed_seconds": 0.49,
+      "sha256": "c70d7b285e257022887cc618df82236d25da4cbb6e983ba8cbc84330462f9b78",
+      "output": "'Goldbach.EndpointMajorant.endpoint_surplus' depends on axioms: [propext, Quot.sound]\n'Goldbach.EndpointMajorant.endpoint_majorant' depends on axioms: [propext, Quot.sound]"
+    },
+    "CutoffVariation": {
+      "elapsed_seconds": 0.71,
+      "sha256": "af17ad7b8ef79edf9bbf3b16eab92f9edf60c5f5c6b14f0530be18e2889ee399",
+      "output": "'Goldbach.CutoffVariation.difference_le_variation' depends on axioms: [propext, Quot.sound]\n'Goldbach.CutoffVariation.cell_variations_le_global' depends on axioms: [propext, Quot.sound]\n'Goldbach.CutoffVariation.entire_cell_above' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.CutoffVariation.entire_cell_above_of_global' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    },
+    "SpectralGapEnergy": {
+      "elapsed_seconds": 1.74,
+      "sha256": "729e8aad642bb7811412dbeb2aaf8180ec08147a100c6bb8c9f4b58d49750a5e",
+      "output": ""
+    },
+    "BalancedSurplus": {
+      "elapsed_seconds": 0.92,
+      "sha256": "844c81eb1408f75853cf554aa1fa323c2b2ef5417031c07832fb5a8e5e3aa459",
+      "output": ""
+    },
+    "Main": {
+      "elapsed_seconds": 1.14,
+      "sha256": "d852b62b615188d5c0171b9eaedd4f4cf4b4c110715342475abb67601748304a",
+      "output": "'Goldbach.Finite.goldbach_to_million' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.Finite.balanced_6256_to_million' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.Finite.not_balanced_filtered_6254' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.Finite.hasPair_6254' depends on axioms: [propext, Classical.choice, Quot.sound]\n'GoldbachFilter.balanced_allowed_progression' depends on axioms: [propext, Classical.choice, Quot.sound]\n'GoldbachFilter.allowed_power_exponent_ge_five' depends on axioms: [propext, Quot.sound]\n'GoldbachFilter.length_properPowerCover_le' depends on axioms: [propext, Quot.sound]\n'GoldbachFilter.prime_pair_of_many_prime_power_pairs' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.prime_or_semiprime_of_rough' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.semiprime_at_exception' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.unique_small_prime_of_rough_composite' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.incidence_example_110' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.ModThree.other_base_eq_three' depends on axioms: [propext, Quot.sound]\n'Goldbach.ModThree.even_exponent_forces_three' depends on axioms: [propext, Quot.sound]\n'Goldbach.ModThree.unique_three_power_in_middle_third' depends on axioms: [propext, Quot.sound]\n'Goldbach.ModThree.unique_unordered_even_exponent_pair' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.BalancedSurplus.length_oddPowerCover_le_split' depends on axioms: [propext, Quot.sound]\n'Goldbach.BalancedSurplus.prime_pair_of_sorted_middle_surplus' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'Goldbach.BalancedSurplus.hasPair_of_split_root_surplus' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.strongGoldbach_of_filtered_tail' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.SpectralGapEnergy.descent_energy_identity' depends on axioms: [propext, Quot.sound]\n'Goldbach.SpectralGapEnergy.centered_descent_attains_bound' depends on axioms: [propext, Quot.sound]\n'Goldbach.SpectralGapEnergy.hasPair_of_central_energy_gap' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.SpectralGapEnergy.empty_window_centered_energy' depends on axioms: [propext, Quot.sound]\n'Goldbach.SpectralGapEnergy.balanced_pair_of_central_local_gap' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'Goldbach.SpectralGapEnergy.strongGoldbach_of_checked_range_and_local_tail' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'Goldbach.MobiusCutoff.full_divisor_switch' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.MobiusCutoff.wide_endpoint_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.OneSidedSieve.cubic_deviation' depends on axioms: [propext, Quot.sound]\n'Goldbach.OneSidedSieve.twice_sum_le_length_mul' depends on axioms: [propext, Quot.sound]\n'Goldbach.OneSidedSieve.cubic_deviation_of_list' depends on axioms: [propext, Quot.sound]\n'Goldbach.CenteredFour.centered_four' depends on axioms: [propext, Quot.sound]\n'Goldbach.EndpointMajorant.endpoint_majorant' depends on axioms: [propext, Quot.sound]\n'Goldbach.EndpointMajorant.endpoint_surplus' depends on axioms: [propext, Quot.sound]\n'Goldbach.CutoffVariation.difference_le_variation' depends on axioms: [propext, Quot.sound]\n'Goldbach.CutoffVariation.cell_variations_le_global' depends on axioms: [propext, Quot.sound]\n'Goldbach.CutoffVariation.entire_cell_above' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Goldbach.CutoffVariation.entire_cell_above_of_global' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    }
+  },
+  "status": "passed",
+  "elapsed_seconds": 503.09
+}

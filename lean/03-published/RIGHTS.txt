@@ -1,0 +1,15 @@
+Rights applying to the files in this Zenodo record
+
+Author: Zixu Zhao (Sichuan University), 2026.
+
+The manuscripts paper-en.pdf, paper-zh.pdf and paper-bilingual.pdf are
+licensed under the Creative Commons Attribution 4.0 International License.
+https://creativecommons.org/licenses/by/4.0/
+
+For original material in lean-source.zip, the rights holder grants Zenodo
+a nonexclusive license to preserve, reproduce and publicly distribute the
+deposited archive. All other rights are reserved. Any third-party materials
+remain subject to their existing terms.
+
+The Zenodo record metadata are available under CC0 in accordance with
+Zenodo policy.
