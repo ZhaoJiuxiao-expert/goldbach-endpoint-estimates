@@ -4,6 +4,8 @@
 
 [English manuscript (PDF)](papers/paper-en.pdf) · [中文论文（PDF）](papers/paper-zh.pdf) · [English LaTeX source](papers/paper-en.tex) · [Lean source and verification materials (ZIP)](lean-source.zip)
 
+[Zenodo record](https://zenodo.org/records/24461761) · [DOI: 10.5281/zenodo.24461761](https://doi.org/10.5281/zenodo.24461761)
+
 ## Results
 
 For each even integer $N \ge 4096$, the paper compares a corrected endpoint with the logarithmically weighted pairs of distinct primes in the central third of the interval. At the square-root sieve level, the exact correction is a sum over higher prime powers and is at most $\lfloor\sqrt{N-2}\rfloor\log 4$. At a lower cube-root level, the extra composite complements detected by the negative Möbius sign are products of three distinct primes. The remaining open step is to establish strict positivity of the prime-pair mass for every sufficiently large even integer.
